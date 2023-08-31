@@ -1,0 +1,18 @@
+CREATE TABLE IF NOT EXISTS users
+(
+    id SERIAL PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS segments
+(
+    id SERIAL PRIMARY KEY,
+    slug VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS users_segments
+(
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users (id) ON DELETE CASCADE NOT NULL,
+    segment_id INT REFERENCES segments (id) ON DELETE CASCADE NOT NULL,
+    UNIQUE(user_id, segment_id)
+);
